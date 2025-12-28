@@ -1,6 +1,7 @@
 import styles from './Playlist.module.css'
 import { useEffect, useState } from 'react'
 import type { Track } from '../../pages/MainPage/MainPage'
+import { TrackItem } from '../../entities/Track/TrackItem'
 
 interface Props {
   trackId: string | null
@@ -39,17 +40,12 @@ export const Playlist = ({ trackId, onTrackIdSelect }: Props) => {
   return (
     <ul className={styles.playlist}>
       {tracks.map(track => (
-        <li
-          key={track.id}
-          style={{ border: `1px solid ${track.id === trackId ? 'orange' : 'transparent'}` }}
-          onClick={() => onTrackIdSelect(track.id)}
-        >
-          <div>{track.attributes.title}</div>
-          <audio
-            src={track.attributes.attachments?.[0]?.url}
-            controls
-          />
-        </li>
+        <TrackItem
+          key={trackId}
+          track={track}
+          trackId={trackId}
+          onTrackIdSelect={onTrackIdSelect}
+        />
       ))}
     </ul>
   )
