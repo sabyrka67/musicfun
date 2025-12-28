@@ -1,6 +1,6 @@
 import styles from './Header.module.css'
-import { PageTitle } from '../PageTitle'
-import { ResetButton } from '../ResetButton'
+import { PageTitle } from '../../shared/ui/PageTitle'
+import { ResetButton } from '../../features/ResetButton'
 
 export const Header = () => {
   return (

@@ -1,14 +1,16 @@
 import styles from './MainPage.module.css'
-import { Header } from '../../components/Header'
-import { Playlist } from '../../components/Playlist'
-import { TrackDetails } from '../../components/TrackDetails'
+import { Header } from '../../widgets/Header'
+import { Playlist } from '../../widgets/Playlist'
+import { TrackDetails } from '../../entities/Track/TrackDetails'
 
 export const MainPage = () => {
   return (
     <div className={styles.mainPage}>
       <Header />
-      <Playlist />
-      <TrackDetails />
+      <div style={{ display: 'flex', columnGap: '30px' }}>
+        <Playlist />
+        <TrackDetails />
+      </div>
     </div>
   )
 }
