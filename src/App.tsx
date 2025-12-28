@@ -1,24 +1,47 @@
+const tracks = [
+  {
+    id: 1,
+    title: 'MusicFun Soundtrack',
+    url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack.mp3',
+  },
+  {
+    id: 2,
+    title: 'MusicFun Soundtrack – Instrumental',
+    url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack-instrumental.mp3',
+  },
+]
+
+const selectedTrackId = null
+
 export const App = () => {
 
-  const tracks = [
-    {
-      id: 1,
-      title: 'MusicFun Soundtrack',
-      url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack.mp3',
-    },
-    {
-      id: 2,
-      title: 'MusicFun Soundtrack – Instrumental',
-      url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack-instrumental.mp3',
-    },
-  ]
+  if (tracks === null) {
+    return (
+      <>
+        <h1>MusicFun</h1>
+        <p>Loading...</p>
+      </>
+    )
+  }
+
+  if (tracks.length === 0) {
+    return (
+      <>
+        <h1>MusicFun</h1>
+        <p>No tracks available</p>
+      </>
+    )
+  }
 
   return (
-    <div>
+    <>
       <h1>MusicFun</h1>
       <ul>
         {tracks.map(track => (
-          <li key={track.id}>
+          <li
+            key={track.id}
+            style={{ border: `1px solid ${track.id === selectedTrackId ? 'orange' : 'transparent'}` }}
+          >
             <div>{track.title}</div>
             <audio
               src={track.url}
@@ -27,6 +50,6 @@ export const App = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   )
 }
