@@ -1,37 +1,32 @@
 import styles from './TrackDetails.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import type { Track } from '../../../pages/MainPage/MainPage'
 
-type Track = {
-  id: number
-  attributes: {
-    title: string
-    lyrics?: string
-    attachments?: { url: string }[]
-  }
+interface Props {
+  trackId: string | null
+  selectedTrack: Track | null
+  onTrackSelect: (track: Track | null) => void
 }
 
-export const TrackDetails = () => {
-  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null)
-  const [selectedTrackId, __] = useState<number | null>(null)
-
+export const TrackDetails = ({ trackId, selectedTrack, onTrackSelect }: Props) => {
   useEffect(() => {
-    if (!selectedTrackId) return
+    if (!trackId) return
 
-    setSelectedTrack(null)
-    fetch(`https://musicfun.it-incubator.app/api/1.0/playlists/tracks/${selectedTrackId}`, {
+    onTrackSelect(null)
+    fetch(`https://musicfun.it-incubator.app/api/1.0/playlists/tracks/${trackId}`, {
       headers: { 'api-key': import.meta.env.VITE_API_KEY },
     })
       .then(res => res.json())
-      .then(json => setSelectedTrack(json.data as Track))
-  }, [selectedTrackId])
+      .then(json => onTrackSelect(json.data))
+  }, [onTrackSelect, trackId])
 
   return (
     <div className={styles.trackDetails}>
       <h2>Track details</h2>
-      {selectedTrackId === null ? (
-        'No Track selected'
+      {trackId === null ? (
+        'No track selected'
       ) : selectedTrack === null ? (
-        'Loading Track...'
+        'Loading...'
       ) : (
         <div>
           <h3>{selectedTrack.attributes.title}</h3>
