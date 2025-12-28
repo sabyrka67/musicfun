@@ -1,5 +1,4 @@
 import styles from './Playlist.module.css'
-import { TrackItem } from '../../entities/Track/TrackItem'
 import { useEffect, useState } from 'react'
 
 type Track = {
@@ -12,7 +11,7 @@ type Track = {
 }
 
 export const Playlist = () => {
-  const [tracks, setTracks] = useState<TrackItem[] | null>(null)
+  const [tracks, setTracks] = useState<Track[] | null>(null)
   const [selectedTrackId, setSelectedTrackId] = useState<number | null>(null)
 
   useEffect(() => {
@@ -20,7 +19,7 @@ export const Playlist = () => {
       headers: { 'api-key': import.meta.env.VITE_API_KEY },
     })
       .then(res => res.json())
-      .then(json => setTracks(json.data as TrackItem[]))
+      .then(json => setTracks(json.data as Track[]))
   }, [])
 
   if (tracks === null) {
