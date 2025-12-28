@@ -8,9 +8,9 @@ interface Props {
 
 export const Header = ({ onResetSelection }: Props) => {
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <PageTitle />
       <ResetButton onResetSelection={onResetSelection} />
-    </div>
+    </header>
   )
 }
